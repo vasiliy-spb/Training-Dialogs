@@ -1,5 +1,5 @@
 import training.dialogs.Dialog;
-import training.dialogs.StringDialog;
+import training.dialogs.impl.StringDialog;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class StringDialogSimpleTest {
         String yesKey = "yes";
         String noKey = "no";
         String maybeKey = "maybe";
-        String title = "Enter the desired answer choice: (%s, %s, %s)".formatted(yesKey, noKey, maybeKey);
+        String title = "Enter the desired answer choice (%s, %s, %s): ".formatted(yesKey, noKey, maybeKey);
         String error = "Wrong input. Try again.";
         List<String> keys = List.of(yesKey, noKey, maybeKey);
         Dialog<String> stringDialog = new StringDialog(title, error, keys);

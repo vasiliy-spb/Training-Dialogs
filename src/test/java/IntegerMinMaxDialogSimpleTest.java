@@ -1,5 +1,5 @@
 import training.dialogs.Dialog;
-import training.dialogs.IntegerMinMaxDialog;
+import training.dialogs.impl.IntegerMinMaxDialog;
 
 public class IntegerMinMaxDialogSimpleTest {
     public static void main(String[] args) {
