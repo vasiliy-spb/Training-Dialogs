@@ -1,24 +1,26 @@
 import training.dialogs.Dialog;
 import training.dialogs.impl.CharacterDialog;
 
-import java.util.Set;
-import java.util.HashSet;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class CharacterDialogSimpleTest {
     public static void main(String[] args) {
         String keyString = "abcdefghijklmnopqrstuvwxyz";
-        Set<Character> keySet = createKeySet(keyString);
         String title = "Enter one English letter: ";
         String error = "Wrong input. Try again.";
-        Dialog<Character> characterDialog = new CharacterDialog(title, error, keySet);
+        Function<String, Character> mapper = new Function<String, Character>() {
+            @Override
+            public Character apply(String s) {
+                s = s.trim().toLowerCase();
+                if (s.length() != 1) {
+                    throw new IllegalArgumentException();
+                }
+                return s.charAt(0);
+            }
+        };
+        Predicate<Character> validator = c -> keyString.indexOf(c) >= 0;
+        Dialog<Character> characterDialog = new CharacterDialog(title, error, mapper, validator);
         System.out.println("User's answer: " + characterDialog.input());
-    }
-
-    private static Set<Character> createKeySet(String keyString) {
-        Set<Character> keySet = new HashSet<>();
-        for (char ch : keyString.toCharArray()) {
-            keySet.add(ch);
-        }
-        return keySet;
     }
 }
