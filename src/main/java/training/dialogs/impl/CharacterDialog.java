@@ -1,10 +1,23 @@
 package training.dialogs.impl;
 
+import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class CharacterDialog extends AbstractDialog<Character> {
-    public CharacterDialog(String title, String error, Function<String, Character> mapper, Predicate<Character> validator) {
-        super(title, error, mapper, validator);
+    public CharacterDialog(String title, String error, Set<Character> keySet) {
+        super(title, error, getMapper(), keySet::contains);
+    }
+
+    private static Function<String, Character> getMapper() {
+        return new Function<String, Character>() {
+            @Override
+            public Character apply(String s) {
+                s = s.trim().toLowerCase();
+                if (s.length() != 1) {
+                    throw new IllegalArgumentException();
+                }
+                return s.charAt(0);
+            }
+        };
     }
 }
