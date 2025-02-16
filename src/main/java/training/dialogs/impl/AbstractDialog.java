@@ -35,6 +35,7 @@ public abstract class AbstractDialog<T> implements Dialog<T> {
             showMessage(error);
         }
     }
+
     private void showMessage(String message) {
         System.out.println(message);
     }

@@ -1,5 +1,5 @@
 package training.dialogs;
 
-public interface Dialog <T>{
+public interface Dialog<T> {
     T input();
 }
